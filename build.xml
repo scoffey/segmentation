@@ -1,0 +1,30 @@
+<project name="segmentation" default="all" basedir=".">
+
+	<property name="src" value="src" />
+	<property name="resources" value="resources" />
+	<property name="bin" value="bin" />
+
+	<target name="all" depends="clean, compile, dist" />
+
+	<target name="compile">
+		<javac srcdir="${src}" destdir="${bin}" encoding="UTF-8" />
+	</target>
+
+	<target name="clean">
+		<delete>
+			<fileset dir="${bin}"  />
+		</delete>
+	</target>
+
+	<target name="dist" depends="clean,compile">
+		<copy todir="${bin}/resources"> 
+			<fileset dir="resources" />
+		</copy>
+		<jar jarfile="${bin}/cgtpe1.jar" basedir="${bin}">
+			<manifest>
+				<attribute name="Main-Class" value="view.CgTpe1" />
+			</manifest>
+		</jar>
+	</target>
+
+</project>
